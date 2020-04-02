@@ -58,4 +58,4 @@ EKSCTL_EXPERIMENTAL=true \
 
 ```
 
-Copy the lines with ssh-rsa and add to GitHub allowing write access: Settings > Deploy Keys > Add deploy key.  Be sure to check the box to allow write access.  
+Copy the lines with ssh-rsa and add to GitHub allowing write access: Settings > Deploy Keys > Add deploy key.  Make certain to check the box to allow write access.  
