@@ -1,0 +1,77 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks1
+  region: us-west-2
+  version: "1.15"
+
+vpc:
+  nat:
+    gateway: HighlyAvailable # other options: Disable, Single (default)
+  # Custom CIDR
+  cidr: 10.10.0.0/16
+  autoAllocateIPv6: true
+
+nodeGroups:
+  - name: ng-1
+    instanceType: m5.large
+    #labels: { role: workers }
+    minSize: 2
+    desiredCapacity: 3
+    maxSize: 5
+    ssh:
+      allow: true
+      publicKeyPath: ~/.ssh/id_rsa.pub
+    #instancesDistribution:
+    #  # Spot instances!
+    #  maxPrice: 0.05
+    #  instanceTypes: ["m5.large", "m4.large"] # At least one instance type should be specified
+    #  onDemandBaseCapacity: 0
+    #  onDemandPercentageAboveBaseCapacity: 50
+    #  spotInstancePools: 2
+    iam:
+      withAddonPolicies:
+        imageBuilder: true
+        autoScaler: true
+        externalDNS: true
+        certManager: true
+        appMesh: true
+        ebs: true
+        fsx: true
+        efs: true
+        albIngress: true
+        xRay: true
+        cloudWatch: true
+  #- name: ng-2
+  #  instanceType: m5.xlarge
+  #  desiredCapacity: 2
+  #  ssh:
+  #    publicKeyPath: ~/.ssh/ec2_id_rsa.pub
+    kubeletExtraConfig:
+        kubeReserved:
+            cpu: "300m"
+            memory: "300Mi"
+            ephemeral-storage: "1Gi"
+        kubeReservedCgroup: "/kube-reserved"
+        systemReserved:
+            cpu: "300m"
+            memory: "300Mi"
+            ephemeral-storage: "1Gi"
+        evictionHard:
+            memory.available:  "200Mi"
+            nodefs.available: "10%"
+        featureGates:
+            DynamicKubeletConfig: true
+            RotateKubeletServerCertificate: true # has to be enabled
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+### IAM roles for service accounts documented here:
+### https://github.com/weaveworks/eksctl/blob/master/examples/13-iamserviceaccounts.yaml
+
+### KMS Secrets Encryption
+#secretsEncryption:
+#  # ARN of the KMS key
+#  keyARN: "arn:aws:kms:us-west-2:000000000000:key/00000000-0000-0000-0000-000000000000"
