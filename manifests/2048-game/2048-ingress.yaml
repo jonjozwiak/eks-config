@@ -5,6 +5,7 @@ metadata:
   namespace: "2048-game"
   annotations:
     kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/tags: Environment=eks1,Team=test
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:090772183824:certificate/d57bce47-90d7-40f2-95e8-d2b5fcde5ffc
