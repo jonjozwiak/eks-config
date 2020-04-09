@@ -20,7 +20,7 @@ terraform apply -var-file=params.tfvars
 ## Update manifests to reflect your environment
 
 * `manifests/kube-system/external-dns.yaml` - domain-filter
-* `manifests/kube-system/alb-ingress-controller-deployment.yaml` - alb.ingress.kubernetes.io/certificate-arn
+* Certificate for any ingresses.  (grep -R certificate-arn *)
 * `manifests/kube-system/alb-ingress-controller-deployment.yaml` - cluster-name (if changing from eks1)
 * `manifests/kube-system/cluster-autoscaler-deployment.yaml` - image version should match cluster version (1.15.6 for K8s 1.15. 1.16.5 for K8S 1.16, etc)
 * `manifests/kube-system/cluster-autoscaler-deployment.yaml` - k8s.io/cluster-autoscaler/eks1 (if changing from eks1)
