@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: polaris-dashboard
+  namespace: polaris
+  labels:
+    app: polaris
+  annotations:
+spec:
+  ports:
+  - name: dashboard
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: polaris
+    component: dashboard
+  type: ClusterIP
