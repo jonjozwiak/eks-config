@@ -15,21 +15,21 @@ vpc:
 
 nodeGroups:
   - name: ng-1
-    instanceType: m5.large
+    instanceType: mixed
     #labels: { role: workers }
     minSize: 2
-    desiredCapacity: 3
+    desiredCapacity: 2
     maxSize: 5
     ssh:
       allow: true
       publicKeyPath: ~/.ssh/id_rsa.pub
-    #instancesDistribution:
-    #  # Spot instances!
-    #  maxPrice: 0.05
-    #  instanceTypes: ["m5.large", "m4.large"] # At least one instance type should be specified
-    #  onDemandBaseCapacity: 0
-    #  onDemandPercentageAboveBaseCapacity: 50
-    #  spotInstancePools: 2
+    # Spot-only Instances
+    instancesDistribution:
+      maxPrice: 0.04
+      instanceTypes: ["m5.large", "m5a.large", "m4.large", "t3.large", "t3a.large", "t2.large"] 
+      onDemandBaseCapacity: 0
+      onDemandPercentageAboveBaseCapacity: 0
+      spotInstancePools: 6
     iam:
       withAddonPolicies:
         imageBuilder: true
