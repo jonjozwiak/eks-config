@@ -14,7 +14,7 @@ vpc:
   autoAllocateIPv6: true
 
 nodeGroups:
-  - name: ng-1
+  - name: spotng
     instanceType: mixed
     #labels: { role: workers }
     minSize: 2
