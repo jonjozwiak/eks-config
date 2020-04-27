@@ -43,6 +43,9 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 # Install eksctl
 brew tap weaveworks/tap
 brew install weaveworks/tap/eksctl
+eksctl version 
+brew upgrade eksctl && brew link --overwrite eksctl
+
 
 # Deploy your cluster
 eksctl create cluster -f cluster.yaml
