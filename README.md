@@ -15,7 +15,7 @@ terraform plan -var-file=params.tfvars
 terraform apply -var-file=params.tfvars
 
 # Get the ARN of your certificate to use in any ingresses that are deployed
-# Also, update your registered DNS name servers with the NS record from your main domain
+# IMPORTANT: Also, update your registered DNS name servers with the NS record from your main domain
 ```
 
 ## Update manifests to reflect your environment
